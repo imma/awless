@@ -3,8 +3,20 @@
 function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
+  source normalize
 
-  uname -a
+  local url_awsless_Darwin="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-darwin-amd64.tar.gz"
+  local url_awsless_Linux="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-linux-amd64.tar.gz"
+
+  local url_awsless="url_awsless_$(uname -s)"
+  local fnm_awsless="$(basename "${!url_awsless}")"
+  cache curl "$fnm_awsless" "${!url_awsless}"
+
+  mkdir -p "$shome/bin"
+  pushd "$shome/bin"
+  tar xfz  "${DATA}/cache/curl/$fnm_awsless"
+  chmod 755 "$shome/bin/awless"
+  popd
 }
 
 main "$@"

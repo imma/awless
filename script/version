@@ -4,8 +4,10 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_awless="0.0.1"
-  jq -n --arg awless "$ver_awless" '{awless: $awless}'
+  local ver_awless="$(awless --version 2>/dev/null | cut -d, -f1 | cut -d= -f2 | perl -pe 's{^v}{}' || true)"
+  jq -n \
+    --arg awless "$ver_awless" \
+    '{awless: $awless}'
 }
 
 version "$@"

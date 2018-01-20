@@ -9,7 +9,7 @@ function main {
   local url_awless_Linux="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-linux-amd64.tar.gz"
 
   local url_awless="url_awless_$(uname -s)"
-  local fnm_awless="$(basename "${!url_awless}")"
+  local fnm_awless="$(basename "${!url_awless}")-${AWLESS_VERSION}"
   cache curl "$fnm_awless" "${!url_awless}"
 
   mkdir -p "$shome/bin"

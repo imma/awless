@@ -5,16 +5,16 @@ function main {
   source "$shome/script/profile"
   source normalize
 
-  local url_awsless_Darwin="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-darwin-amd64.tar.gz"
-  local url_awsless_Linux="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-linux-amd64.tar.gz"
+  local url_awless_Darwin="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-darwin-amd64.tar.gz"
+  local url_awless_Linux="https://github.com/wallix/awless/releases/download/v${AWLESS_VERSION}/awless-linux-amd64.tar.gz"
 
-  local url_awsless="url_awsless_$(uname -s)"
-  local fnm_awsless="$(basename "${!url_awsless}")"
-  cache curl "$fnm_awsless" "${!url_awsless}"
+  local url_awless="url_awless_$(uname -s)"
+  local fnm_awless="$(basename "${!url_awless}")"
+  cache curl "$fnm_awless" "${!url_awless}"
 
   mkdir -p "$shome/bin"
   pushd "$shome/bin"
-  tar xfz  "${DATA}/cache/curl/$fnm_awsless"
+  tar xfz  "${DATA}/cache/curl/$fnm_awless"
   chmod 755 "$shome/bin/awless"
   popd
 }
